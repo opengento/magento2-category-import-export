@@ -14,6 +14,8 @@ use Magento\Eav\Model\ResourceModel\Entity\Attribute\CollectionFactory;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Exception\LocalizedException;
 
+use function sprintf;
+
 class Attributes implements OptionSourceInterface
 {
     private const EXCLUDE_ATTRIBUTES = [

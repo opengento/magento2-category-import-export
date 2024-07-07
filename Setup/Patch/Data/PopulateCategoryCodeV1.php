@@ -13,6 +13,9 @@ use Magento\Catalog\Model\ResourceModel\Category as ResourceCategory;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 
+use function str_replace;
+use function strtolower;
+
 class PopulateCategoryCodeV1 implements DataPatchInterface
 {
     public function __construct(

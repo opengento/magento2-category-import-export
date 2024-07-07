@@ -12,6 +12,8 @@ use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 use Opengento\CategoryImportExport\Model\Session\DownloadContext;
 
+use function sprintf;
+
 class Download implements ButtonProviderInterface
 {
     public function __construct(

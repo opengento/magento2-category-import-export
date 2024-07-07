@@ -14,6 +14,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
 use Opengento\CategoryImportExport\Model\Import\Categories as ImportCategories;
 
+use function array_unshift;
+
 class Categories
 {
     public function __construct(

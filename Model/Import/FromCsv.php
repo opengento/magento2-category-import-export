@@ -12,6 +12,9 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\File\Csv;
 use Opengento\CategoryImportExport\Model\Csv\Options;
 
+use function array_combine;
+use function array_shift;
+
 class FromCsv
 {
     public function __construct(

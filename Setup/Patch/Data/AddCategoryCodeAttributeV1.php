@@ -11,7 +11,6 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Zend_Validate_Exception;
 
 class AddCategoryCodeAttributeV1 implements DataPatchInterface
 {
@@ -32,7 +31,6 @@ class AddCategoryCodeAttributeV1 implements DataPatchInterface
 
     /**
      * @throws LocalizedException
-     * @throws Zend_Validate_Exception
      */
     public function apply(): self
     {

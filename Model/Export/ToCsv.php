@@ -15,6 +15,11 @@ use Magento\Framework\File\Csv;
 use Magento\Framework\Filesystem;
 use Opengento\CategoryImportExport\Model\Csv\Options;
 
+use function array_keys;
+use function array_merge;
+use function array_unshift;
+use function time;
+
 class ToCsv
 {
     public function __construct(

@@ -15,6 +15,8 @@ use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\Phrase;
 use Opengento\CategoryImportExport\Model\Session\DownloadContext;
 
+use function basename;
+
 class CategoryDownload extends Action implements HttpGetActionInterface
 {
     public const ADMIN_RESOURCE = 'Opengento_CategoryImportExport::export';
