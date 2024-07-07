@@ -13,7 +13,7 @@ use Magento\Catalog\Model\ResourceModel\Category as ResourceCategory;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 
-class PopulateCategoriesIdentifierV1 implements DataPatchInterface
+class PopulateCategoryCodeV1 implements DataPatchInterface
 {
     public function __construct(
         private CollectionFactory $collecionFactory,
@@ -60,9 +60,9 @@ class PopulateCategoriesIdentifierV1 implements DataPatchInterface
 
         /** @var Category $category */
         foreach ($categories as $category) {
-            if ($category->getId() !== '1' && !$category->getData('category_code')) {
+            if (!$category->getData('category_code')) {
                 $code = '';
-                foreach($category->getPathIds() as $pathId) {
+                foreach ($category->getPathIds() as $pathId) {
                     if ($pathId !== '1') {
                         if ($code === '') {
                             $code = $idsToName[$pathId];

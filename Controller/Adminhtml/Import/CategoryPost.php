@@ -7,8 +7,6 @@ declare(strict_types=1);
 
 namespace Opengento\CategoryImportExport\Controller\Adminhtml\Import;
 
-use Opengento\CategoryImportExport\Model\Csv\Options;
-use Opengento\CategoryImportExport\Model\Import\FromCsv;
 use Exception;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -18,6 +16,8 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\File\UploaderFactory;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Phrase;
+use Opengento\CategoryImportExport\Model\Csv\Options;
+use Opengento\CategoryImportExport\Model\Import\FromCsv;
 
 class CategoryPost extends Action implements HttpPostActionInterface
 {

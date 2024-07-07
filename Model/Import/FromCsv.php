@@ -5,12 +5,12 @@
  */
 namespace Opengento\CategoryImportExport\Model\Import;
 
-use Opengento\CategoryImportExport\Model\Csv\Options;
 use Exception;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\File\Csv;
+use Opengento\CategoryImportExport\Model\Csv\Options;
 
 class FromCsv
 {

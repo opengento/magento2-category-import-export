@@ -6,10 +6,10 @@
 namespace Opengento\CategoryImportExport\Setup\Patch\Data;
 
 use Magento\Catalog\Model\Category;
+use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Zend_Validate_Exception;
 

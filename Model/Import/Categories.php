@@ -7,7 +7,6 @@ declare(strict_types=1);
 
 namespace Opengento\CategoryImportExport\Model\Import;
 
-use Opengento\CategoryImportExport\Model\Config\Source\Category\Attributes;
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\CategoryFactory;

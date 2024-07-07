@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Opengento\CategoryImportExport\Ui\Component\Form\Button;
 
-use Opengento\CategoryImportExport\Model\Session\DownloadContext;
 use Magento\Framework\Phrase;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
+use Opengento\CategoryImportExport\Model\Session\DownloadContext;
 
 class Download implements ButtonProviderInterface
 {

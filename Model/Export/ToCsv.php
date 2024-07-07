@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Opengento\CategoryImportExport\Model\Export;
 
-use Opengento\CategoryImportExport\Model\Csv\Options;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\File\Csv;
 use Magento\Framework\Filesystem;
+use Opengento\CategoryImportExport\Model\Csv\Options;
 
 class ToCsv
 {

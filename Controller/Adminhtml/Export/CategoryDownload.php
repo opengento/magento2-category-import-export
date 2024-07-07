@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Opengento\CategoryImportExport\Controller\Adminhtml\Export;
 
-use Opengento\CategoryImportExport\Model\Session\DownloadContext;
 use Exception;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\Phrase;
+use Opengento\CategoryImportExport\Model\Session\DownloadContext;
 
 class CategoryDownload extends Action implements HttpGetActionInterface
 {

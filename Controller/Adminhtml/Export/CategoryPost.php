@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace Opengento\CategoryImportExport\Controller\Adminhtml\Export;
 
-use Opengento\CategoryImportExport\Model\Csv\Options;
-use Opengento\CategoryImportExport\Model\Export\ToCsv;
-use Opengento\CategoryImportExport\Model\Session\DownloadContext;
 use Exception;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
+use Opengento\CategoryImportExport\Model\Csv\Options;
+use Opengento\CategoryImportExport\Model\Export\ToCsv;
+use Opengento\CategoryImportExport\Model\Session\DownloadContext;
 
 class CategoryPost extends Action implements HttpPostActionInterface
 {
