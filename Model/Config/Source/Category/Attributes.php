@@ -18,16 +18,7 @@ use function sprintf;
 
 class Attributes implements OptionSourceInterface
 {
-    private const EXCLUDE_ATTRIBUTES = [
-        'all_children',
-        'category_code',
-        'children',
-        'children_count',
-        'level',
-        'path',
-        'path_in_store',
-        'url_path',
-    ];
+    private const EXCLUDE_ATTRIBUTES = ['category_code'];
 
     private ?array $options = null;
 
@@ -52,6 +43,11 @@ class Attributes implements OptionSourceInterface
         $collection = $this->collectionFactory->create();
         $collection->setEntityTypeFilter($this->config->getEntityType(Category::ENTITY));
         $collection->addFieldToSelect(['attribute_code', 'frontend_label']);
+        $collection->joinLeft(
+            ['cea' => 'catalog_eav_attribute'],
+            'main_table.attribute_id = cea.attribute_id AND cea.is_visible = 1',
+            ['']
+        );
         $collection->addFieldToFilter('attribute_code', ['nin' => self::EXCLUDE_ATTRIBUTES]);
         $collection->setOrder('frontend_label', 'ASC');
         $collection->setOrder('attribute_code', 'ASC');
