@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Opengento_CategoryImportExport::system_convert_import" title="Import Categories" translate="title" module="Opengento_CategoryImportExport" sortOrder="100" parent="Magento_Backend::system_convert" action="adminhtml/import/category" resource="Opengento_CategoryImportExport::import"/>
+        <add id="Opengento_CategoryImportExport::system_convert_export" title="Export Categories" translate="title" module="Opengento_CategoryImportExport" sortOrder="110" parent="Magento_Backend::system_convert" action="adminhtml/export/category" resource="Opengento_CategoryImportExport::export"/>
+    </menu>
+</config>

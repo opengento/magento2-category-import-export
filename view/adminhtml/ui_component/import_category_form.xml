@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">import_category_form.import_category_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Import Categories</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save">
+                <class>primary</class>
+                <label translate="true">Upload and Import</label>
+            </button>
+        </buttons>
+        <namespace>import_category_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>import_category_form.import_category_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="import_category_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="adminhtml/import/categoryPost"/>
+        </settings>
+        <aclResource>Opengento_CategoryImportExport::import</aclResource>
+        <dataProvider class="Opengento\CategoryImportExport\Model\DataProvider" name="import_category_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">File to Import</label>
+        </settings>
+        <file name="file">
+            <settings>
+                <label translate="true">Select File to Import</label>
+                <dataScope>file</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </file>
+        <field name="delimiter" formElement="input" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">,</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Field Separator</label>
+                <elementTmpl>ui/form/element/input</elementTmpl>
+                <dataScope>delimiter</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="enclosure" formElement="input" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">"</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Field Enclosure</label>
+                <elementTmpl>ui/form/element/input</elementTmpl>
+                <dataScope>enclosure</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+</form>
