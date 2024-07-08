@@ -11,8 +11,10 @@ use Exception;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
+use Magento\Store\Model\Store;
 use Opengento\CategoryImportExport\Model\Csv\Options;
 use Opengento\CategoryImportExport\Model\Export\ToCsv;
 use Opengento\CategoryImportExport\Model\Session\DownloadContext;
@@ -31,16 +33,12 @@ class CategoryPost extends Action implements HttpPostActionInterface
 
     public function execute(): Redirect
     {
-        $request = $this->getRequest();
         try {
             $this->downloadContext->setFile(
                 $this->toCsv->execute(
-                    (array)$request->getParam('store_ids'),
-                    (array)$request->getParam('attributes'),
-                    new Options(
-                        (string)$request->getParam('delimiter'),
-                        (string)$request->getParam('enclosure')
-                    )
+                    $this->resolveStoreIds(),
+                    $this->resolveAttributes(),
+                    Options::createFromRequest($this->getRequest())
                 )
             );
 
@@ -52,5 +50,18 @@ class CategoryPost extends Action implements HttpPostActionInterface
         }
 
         return $this->resultRedirectFactory->create()->setPath('*/*/category');
+    }
+
+    private function resolveStoreIds(): array
+    {
+        return (array)$this->getRequest()->getParam('store_ids', [Store::DEFAULT_STORE_ID]);
+    }
+
+    /**
+     * @throws InputException
+     */
+    private function resolveAttributes(): array
+    {
+        return (array)$this->getRequest()->getParam('attributes') ?: throw InputException::requiredField('attributes');
     }
 }

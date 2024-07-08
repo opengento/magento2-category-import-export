@@ -37,10 +37,7 @@ class CategoryPost extends Action implements HttpPostActionInterface
         try {
             $this->fromCsv->execute(
                 $this->uploadFile('import-' . time() . '-categories.csv'),
-                new Options(
-                    (string)$this->getRequest()->getParam('delimiter'),
-                    (string)$this->getRequest()->getParam('enclosure')
-                )
+                Options::createFromRequest($this->getRequest())
             );
             $this->messageManager->addSuccessMessage(new Phrase('Import successful!'));
         } catch (LocalizedException $e) {

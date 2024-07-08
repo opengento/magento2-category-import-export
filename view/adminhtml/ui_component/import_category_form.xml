@@ -51,9 +51,11 @@
             <settings>
                 <label translate="true">Select File to Import</label>
                 <dataScope>file</dataScope>
+                <!-- ToDo: https://github.com/magento/magento2/issues/38908
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
+                -->
             </settings>
         </file>
         <field name="delimiter" formElement="input" >
