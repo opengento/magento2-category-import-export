@@ -16,7 +16,7 @@
                 </field>
                 <field id="excluded_attributes" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" canRestore="1">
                     <label>Exclude Attributes</label>
-                    <source_model>Opengento\CategoryImportExport\Config\Source\Category\VisibleAttributes</source_model>
+                    <source_model>Opengento\CategoryImportExport\Model\Config\Source\Category\VisibleAttributes</source_model>
                     <comment>These attributes won't be imported or exported.</comment>
                 </field>
             </group>
