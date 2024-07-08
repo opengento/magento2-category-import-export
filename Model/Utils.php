@@ -22,7 +22,7 @@ class Utils
      */
     public function sanitizeData(array $data): array
     {
-        $categoryCode = $row['category_code'] ?? throw InputException::requiredField('category_code');
+        $categoryCode = $data['category_code'] ?? throw InputException::requiredField('category_code');
         $data = array_diff_key($data, array_flip($this->excludedFields->get()));
         $data['category_code'] = $categoryCode;
 
