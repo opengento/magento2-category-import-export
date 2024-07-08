@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <catalog>
+            <category_import_export>
+                <exclude_fields>created_at,created_in,parent_id,store_id,store,updated_at,updated_in</exclude_fields>
+                <exclude_attributes>image</exclude_attributes>
+            </category_import_export>
+        </catalog>
+    </default>
+</config>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="catalog">
+            <group id="category_import_export" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <resource>Magento_Catalog::config_catalog</resource>
+                <label>Category Import Export</label>
+                <field id="excluded_fields" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Exclude Fields</label>
+                    <comment>Comma-separated.</comment>
+                </field>
+                <field id="excluded_attributes" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" canRestore="1">
+                    <label>Exclude Attributes</label>
+                    <source_model>Opengento\CategoryImportExport\Config\Source\VisibleAttributes</source_model>
+                    <comment>These attributes won't be imported or exported.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

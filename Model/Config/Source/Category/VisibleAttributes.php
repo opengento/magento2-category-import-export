@@ -14,18 +14,16 @@ use Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection;
 use Magento\Eav\Model\ResourceModel\Entity\Attribute\CollectionFactory;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Opengento\CategoryImportExport\Model\Config\ExcludedFields;
 
 use function sprintf;
 
-class Attributes implements OptionSourceInterface
+class VisibleAttributes implements OptionSourceInterface
 {
     private ?array $options = null;
 
     public function __construct(
         private Config $config,
-        private CollectionFactory $collectionFactory,
-        private ExcludedFields $excludedFields
+        private CollectionFactory $collectionFactory
     ) {}
 
     /**
@@ -43,7 +41,7 @@ class Attributes implements OptionSourceInterface
     {
         $options = [];
         /** @var Attribute $attribute */
-        foreach ($this->createAttributeCollection()->getItems() as $attribute) {
+        foreach ($this->createVisibleAttributeCollection()->getItems() as $attribute) {
             $options[] = [
                 'label' => sprintf('%s (%s)', $attribute->getDefaultFrontendLabel(), $attribute->getAttributeCode()),
                 'value' => $attribute->getAttributeCode()
@@ -56,12 +54,16 @@ class Attributes implements OptionSourceInterface
     /**
      * @throws LocalizedException
      */
-    private function createAttributeCollection(): Collection
+    private function createVisibleAttributeCollection(): Collection
     {
         $collection = $this->collectionFactory->create();
         $collection->setEntityTypeFilter($this->config->getEntityType(Category::ENTITY));
         $collection->addFieldToSelect(['attribute_code', 'frontend_label']);
-        $collection->addFieldToFilter('attribute_code', ['nin' => $this->excludedFields->get()]);
+        $collection->joinLeft(
+            ['cea' => 'catalog_eav_attribute'],
+            'main_table.attribute_id = cea.attribute_id AND cea.is_visible = 1',
+            ['']
+        );
         $collection->setOrder('frontend_label', 'ASC');
         $collection->setOrder('attribute_code', 'ASC');
 

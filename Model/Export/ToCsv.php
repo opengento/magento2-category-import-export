@@ -9,6 +9,7 @@ namespace Opengento\CategoryImportExport\Model\Export;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\File\Csv;
@@ -32,6 +33,7 @@ class ToCsv
      * @throws NoSuchEntityException
      * @throws FileSystemException
      * @throws LocalizedException
+     * @throws InputException
      */
     public function execute(array $storeIds, array $attributes, Options $options): string
     {

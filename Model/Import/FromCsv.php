@@ -7,6 +7,7 @@ namespace Opengento\CategoryImportExport\Model\Import;
 
 use Exception;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\File\Csv;
@@ -26,6 +27,7 @@ class FromCsv
      * @throws NoSuchEntityException
      * @throws CouldNotSaveException
      * @throws LocalizedException
+     * @throws InputException
      * @throws Exception
      */
     public function execute(string $filePath, Options $options): void

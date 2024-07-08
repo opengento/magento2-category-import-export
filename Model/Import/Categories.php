@@ -13,41 +13,28 @@ use Magento\Catalog\Model\CategoryFactory;
 use Magento\Catalog\Model\ResourceModel\Category\Collection;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Phrase;
 use Magento\Store\Model\StoreManagerInterface;
+use Opengento\CategoryImportExport\Model\Utils;
 
 class Categories
 {
-    public const FORBIDDEN_FIELDS = [
-        'all_children',
-        'children',
-        'children_count',
-        'created_at',
-        'created_in',
-        'level',
-        'parent_id',
-        'path',
-        'path_in_store',
-        'url_path',
-        'store_id',
-        'store',
-        'updated_at',
-        'updated_in',
-    ];
-
     public function __construct(
         private CollectionFactory $collectionFactory,
         private StoreManagerInterface $storeManager,
         private CategoryFactory $categoryFactory,
-        private CategoryRepositoryInterface $categoryRepository
+        private CategoryRepositoryInterface $categoryRepository,
+        private Utils $utils
     ) {}
 
     /**
      * @throws NoSuchEntityException
      * @throws CouldNotSaveException
      * @throws LocalizedException
+     * @throws InputException
      */
     public function execute(array $data): void
     {
@@ -90,16 +77,13 @@ class Categories
 
     /**
      * @throws NoSuchEntityException
+     * @throws InputException
      */
     private function batchByStore(array $data): array
     {
         $batch = [];
         foreach ($data as $row) {
-            $storeId = $this->storeManager->getStore($row['store'] ?? 'admin')->getId();
-            foreach (self::FORBIDDEN_FIELDS as $field) {
-                unset($row[$field]);
-            }
-            $batch[$storeId][] = $row;
+            $batch[$this->storeManager->getStore($row['store'] ?? 'admin')->getId()][] = $this->utils->sanitizeData($row);
         }
 
         return $batch;

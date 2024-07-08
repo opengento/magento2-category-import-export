@@ -9,10 +9,11 @@ namespace Opengento\CategoryImportExport\Model\Export;
 
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
+use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
-use Opengento\CategoryImportExport\Model\Import\Categories as ImportCategories;
+use Opengento\CategoryImportExport\Model\Utils;
 
 use function array_unshift;
 
@@ -20,12 +21,14 @@ class Categories
 {
     public function __construct(
         private CollectionFactory $collectionFactory,
-        private StoreManagerInterface $storeManager
+        private StoreManagerInterface $storeManager,
+        private Utils $utils
     ) {}
 
     /**
      * @throws NoSuchEntityException
      * @throws LocalizedException
+     * @throws InputException
      */
     public function execute(int $storeId, array $attributes): array
     {
@@ -40,10 +43,7 @@ class Categories
         $export = [];
         /** @var Category $category */
         foreach ($collection->getItems() as $category) {
-            $row = $category->toArray($attributes);
-            foreach (ImportCategories::FORBIDDEN_FIELDS as $field) {
-                unset($row[$field]);
-            }
+            $row = $this->utils->sanitizeData($category->toArray($attributes));
             $row['store'] = $this->storeManager->getStore($category->getStoreId())->getCode();
             $row['parent_code'] = $category->getParentCategory()->getData('category_code');
             $export[] = $row;
