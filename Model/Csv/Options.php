@@ -13,14 +13,14 @@ use Magento\Framework\Phrase;
 
 use function strlen;
 
-readonly class Options
+class Options
 {
     /**
      * @throws InputException
      */
     public function __construct(
-        public string $delimiter = ',',
-        public string $enclosure = '"'
+        public readonly string $delimiter = ',',
+        public readonly string $enclosure = '"'
     ) {
         if (strlen($this->delimiter) !== 1) {
             throw new InputException(
