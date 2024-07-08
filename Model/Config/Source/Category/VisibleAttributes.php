@@ -61,9 +61,10 @@ class VisibleAttributes implements OptionSourceInterface
         $collection->addFieldToSelect(['attribute_code', 'frontend_label']);
         $collection->joinLeft(
             ['cea' => 'catalog_eav_attribute'],
-            'main_table.attribute_id = cea.attribute_id AND cea.is_visible = 1',
+            'main_table.attribute_id = cea.attribute_id',
             ['']
         );
+        $collection->addFieldToFilter('cea.is_visible', 1);
         $collection->setOrder('frontend_label', 'ASC');
         $collection->setOrder('attribute_code', 'ASC');
 
