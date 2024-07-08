@@ -44,7 +44,7 @@ class Categories
         /** @var Category $category */
         foreach ($collection->getItems() as $category) {
             $row = $this->utils->sanitizeData($category->toArray($attributes));
-            $row['store'] = $this->storeManager->getStore($category->getStoreId())->getCode();
+            $row['store'] = $this->storeManager->getStore($storeId)->getCode();
             $row['parent_code'] = $category->getParentCategory()->getData('category_code');
             $export[] = $row;
         }
