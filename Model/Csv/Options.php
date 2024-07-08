@@ -13,38 +13,38 @@ use Magento\Framework\Phrase;
 
 use function strlen;
 
-class Options
+readonly class Options
 {
+    /**
+     * @throws InputException
+     */
     public function __construct(
-        public readonly string $delimiter = ',',
-        public readonly string $enclosure = '"'
-    ) {}
+        public string $delimiter = ',',
+        public string $enclosure = '"'
+    ) {
+        if (strlen($this->delimiter) !== 1) {
+            throw new InputException(
+                new Phrase(
+                    'Invalid value of "%1" provided for the %2 field. Expected a single valid character.',
+                    ['delimiter', $this->delimiter]
+                )
+            );
+        }
+        if (strlen($this->enclosure) !== 1) {
+            throw new InputException(
+                new Phrase(
+                    'Invalid value of "%1" provided for the %2 field. Expected a single valid character.',
+                    ['enclosure', $this->enclosure]
+                )
+            );
+        }
+    }
 
     /**
      * @throws InputException
      */
     public static function createFromRequest(RequestInterface $request): Options
     {
-        $delimiter = (string)$request->getParam('delimiter');
-        $enclosure = (string)$request->getParam('enclosure');
-
-        if (strlen($delimiter) !== 1) {
-            throw new InputException(
-                new Phrase(
-                    'Invalid value of "%1" provided for the %2 field. Expected a single valid character.',
-                    ['delimiter', $delimiter]
-                )
-            );
-        }
-        if (strlen($enclosure) !== 1) {
-            throw new InputException(
-                new Phrase(
-                    'Invalid value of "%1" provided for the %2 field. Expected a single valid character.',
-                    ['enclosure', $enclosure]
-                )
-            );
-        }
-
-        return new Options($delimiter, $enclosure);
+        return new Options((string)$request->getParam('delimiter'), (string)$request->getParam('enclosure'));
     }
 }
