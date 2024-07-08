@@ -46,9 +46,10 @@ class ExcludedFields
         $collection->addFieldToSelect('attribute_code');
         $collection->joinLeft(
             ['cea' => 'catalog_eav_attribute'],
-            'main_table.attribute_id = cea.attribute_id AND cea.is_visible = 0',
+            'main_table.attribute_id = cea.attribute_id',
             ['']
         );
+        $collection->addFieldToFilter('cea.is_visible', 0);
 
         return $collection->getColumnValues('attribute_code');
     }
