@@ -46,6 +46,7 @@ bin/magento setup:upgrade
 
 ## Documentation
 
+- The available format for import/export is CSV 
 - A new attribute category attribute is added with the module: `category_code` which allows to identify the categories.
 
 ## Support
