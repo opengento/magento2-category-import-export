@@ -41,7 +41,7 @@ class AddCategoryCodeAttributeV1 implements DataPatchInterface
             'category_code',
             [
                 'type' => 'varchar',
-                'label' => 'Identifier',
+                'label' => 'Category Code',
                 'input' => 'text',
                 'source' => '',
                 'visible' => true,
