@@ -14,6 +14,7 @@ use Magento\Framework\File\Csv;
 use Opengento\CategoryImportExport\Model\Csv\Options;
 
 use function array_combine;
+use function array_map;
 use function array_shift;
 
 class FromCsv
@@ -38,7 +39,7 @@ class FromCsv
         }
 
         $rows = $this->csv->getData($filePath);
-        $keys = array_shift($rows);
+        $keys = array_map(static fn (string $key): string => preg_replace('/[^\w]/', '', $key), array_shift($rows));
 
         $data = [];
         foreach ($rows as $row) {
