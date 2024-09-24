@@ -50,7 +50,10 @@ class Categories
      */
     private function processStore(int $storeId, array $rows): void
     {
+        $currentStore = $this->storeManager->getStore();
+        $this->storeManager->setCurrentStore($storeId);
         $collection = $this->createCollection($storeId, array_column($rows, 'category_code'));
+
         try {
             foreach ($rows as $row) {
                 $category = $collection->getItemByColumnValue('category_code', $row['category_code'])
@@ -72,6 +75,8 @@ class Categories
                         $e->getMessage()]
                 )
             );
+        } finally {
+            $this->storeManager->setCurrentStore($currentStore);
         }
     }
 
