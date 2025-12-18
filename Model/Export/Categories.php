@@ -40,12 +40,15 @@ class Categories
         $collection->addAttributeToSelect($attributes);
         $collection->addAttributeToFilter('parent_id', ['neq' => 0]);
 
+        $parents = [];
         $export = [];
         /** @var Category $category */
         foreach ($collection->getItems() as $category) {
+            $parents[$category->getId()] ??= $category;
+            $parentCategory = $parents[$category->getParentId()] ?? null;
             $row = $this->utils->sanitizeData($category->toArray($attributes));
             $row['store'] = $this->storeManager->getStore($storeId)->getCode();
-            $row['parent_code'] = $collection->getItemById($category->getParentId())?->getData('category_code');
+            $row['parent_code'] = $parentCategory?->getData('category_code');
             $export[] = $row;
         }
 
