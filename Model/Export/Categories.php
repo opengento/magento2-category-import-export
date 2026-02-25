@@ -23,7 +23,8 @@ class Categories
         private CollectionFactory $collectionFactory,
         private StoreManagerInterface $storeManager,
         private Utils $utils
-    ) {}
+    ) {
+    }
 
     /**
      * @throws NoSuchEntityException
@@ -33,12 +34,22 @@ class Categories
     public function execute(int $storeId, array $attributes): array
     {
         array_unshift($attributes, 'category_code', 'parent_id');
+
+        $store = $this->storeManager->getStore($storeId);
+
+        // Get the root category to derive the path prefix
+        $rootCategoryId = (int) $store->getRootCategoryId();
+
         $collection = $this->collectionFactory->create();
         $collection->setStoreId($storeId);
         $collection->setProductStoreId($storeId);
         $collection->setLoadProductCount(false);
         $collection->addAttributeToSelect($attributes);
-        $collection->addAttributeToFilter('parent_id', ['neq' => 0]);
+
+        $collection->addPathsFilter("1/{$rootCategoryId}");
+
+        // Sort by level so parents are always in $parents[] before children
+        $collection->addAttributeToSort('level', 'ASC');
 
         $parents = [];
         $export = [];
@@ -47,7 +58,7 @@ class Categories
             $parents[$category->getId()] ??= $category;
             $parentCategory = $parents[$category->getParentId()] ?? null;
             $row = $this->utils->sanitizeData($category->toArray($attributes));
-            $row['store'] = $this->storeManager->getStore($storeId)->getCode();
+            $row['store'] = $store->getCode();
             $row['parent_code'] = $parentCategory?->getData('category_code');
             $export[] = $row;
         }
