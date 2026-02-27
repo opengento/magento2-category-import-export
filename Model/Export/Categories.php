@@ -9,10 +9,10 @@ namespace Opengento\CategoryImportExport\Model\Export;
 
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
-use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
+use Opengento\CategoryImportExport\Exception\InputException;
 use Opengento\CategoryImportExport\Model\Utils;
 
 use function array_unshift;
@@ -55,6 +55,11 @@ class Categories
         $export = [];
         /** @var Category $category */
         foreach ($collection->getItems() as $category) {
+            // Skip virtual categories
+            if ($category->getData('is_virtual_category') ?? false) {
+                continue;
+            }
+
             $parents[$category->getId()] ??= $category;
             $parentCategory = $parents[$category->getParentId()] ?? null;
             $row = $this->utils->sanitizeData($category->toArray($attributes));

@@ -11,10 +11,10 @@ use Exception;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
-use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
 use Magento\Store\Model\Store;
+use Opengento\CategoryImportExport\Exception\InputException;
 use Opengento\CategoryImportExport\Model\Csv\Options;
 use Opengento\CategoryImportExport\Model\Export\ToCsv;
 use Opengento\CategoryImportExport\Model\Session\DownloadContext;
@@ -44,7 +44,7 @@ class CategoryPost extends Action implements HttpPostActionInterface
 
             $this->messageManager->addSuccessMessage(new Phrase('The export file is now ready for download.'));
         } catch (LocalizedException $e) {
-            $this->messageManager->addErrorMessage($e, $e->getMessage());
+            $this->messageManager->addErrorMessage($e->getMessage());
         } catch (Exception $e) {
             $this->messageManager->addExceptionMessage($e, new Phrase('Something went wrong while exporting the data.'));
         }
