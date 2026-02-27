@@ -33,7 +33,7 @@ class Categories
      */
     public function execute(int $storeId, array $attributes): array
     {
-        array_unshift($attributes, 'category_code', 'parent_id');
+        array_unshift($attributes, 'category_code', 'parent_id', 'entity_id');
 
         $store = $this->storeManager->getStore($storeId);
 
