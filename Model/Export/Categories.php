@@ -9,10 +9,10 @@ namespace Opengento\CategoryImportExport\Model\Export;
 
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
-use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
+use Opengento\CategoryImportExport\Exception\InputException;
 use Opengento\CategoryImportExport\Model\Utils;
 
 use function array_unshift;
@@ -45,6 +45,10 @@ class Categories
         $collection->setProductStoreId($storeId);
         $collection->setLoadProductCount(false);
         $collection->addAttributeToSelect($attributes);
+        $collection->addAttributeToFilter([
+            ['attribute' => 'is_virtual_category', 'null' => true],
+            ['attribute' => 'is_virtual_category', 'eq'   => 0]
+        ]);
 
         $collection->addPathsFilter("1/{$rootCategoryId}");
 

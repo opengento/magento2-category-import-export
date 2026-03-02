@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Opengento\CategoryImportExport\Model\Csv;
 
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\Exception\InputException;
 use Magento\Framework\Phrase;
+use Opengento\CategoryImportExport\Exception\InputException;
 
 use function strlen;
 

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Opengento\CategoryImportExport\Model;
 
-use Magento\Framework\Exception\InputException;
+use Opengento\CategoryImportExport\Exception\InputException;
 use Opengento\CategoryImportExport\Model\Config\ExcludedFields;
 
 use function array_diff_key;
@@ -22,7 +22,7 @@ class Utils
      */
     public function sanitizeData(array $data): array
     {
-        $categoryCode = $data['category_code'] ?? throw InputException::requiredField('category_code');
+        $categoryCode = $data['category_code'] ?? throw InputException::requiredField('category_code', $data['entity_id'] ?? null);
         $data = array_diff_key($data, array_flip($this->excludedFields->get()));
 
         return ['category_code' => $categoryCode] + $data;

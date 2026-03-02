@@ -7,11 +7,11 @@ namespace Opengento\CategoryImportExport\Model\Import;
 
 use Exception;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\File\Csv;
 use Magento\Framework\Phrase;
+use Opengento\CategoryImportExport\Exception\InputException;
 use Opengento\CategoryImportExport\Model\Csv\Options;
 
 use function array_combine;
