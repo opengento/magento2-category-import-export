@@ -45,6 +45,10 @@ class Categories
         $collection->setProductStoreId($storeId);
         $collection->setLoadProductCount(false);
         $collection->addAttributeToSelect($attributes);
+        $collection->addAttributeToFilter([
+            ['attribute' => 'is_virtual_category', 'null' => true],
+            ['attribute' => 'is_virtual_category', 'eq'   => 0]
+        ]);
 
         $collection->addPathsFilter("1/{$rootCategoryId}");
 
@@ -55,11 +59,6 @@ class Categories
         $export = [];
         /** @var Category $category */
         foreach ($collection->getItems() as $category) {
-            // Skip virtual categories
-            if ($category->getData('is_virtual_category') ?? false) {
-                continue;
-            }
-
             $parents[$category->getId()] ??= $category;
             $parentCategory = $parents[$category->getParentId()] ?? null;
             $row = $this->utils->sanitizeData($category->toArray($attributes));
