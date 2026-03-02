@@ -9,7 +9,7 @@
     <default>
         <catalog>
             <category_import_export>
-                <exclude_fields>created_at,created_in,parent_id,store_id,store,updated_at,updated_in</exclude_fields>
+                <exclude_fields>entity_id,row_id,created_at,created_in,parent_id,store_id,store,updated_at,updated_in</exclude_fields>
                 <exclude_attributes>image</exclude_attributes>
             </category_import_export>
         </catalog>

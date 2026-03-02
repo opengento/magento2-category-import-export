@@ -58,6 +58,7 @@ class Categories
             $parents[$category->getId()] ??= $category;
             $parentCategory = $parents[$category->getParentId()] ?? null;
             $row = $this->utils->sanitizeData($category->toArray($attributes));
+            $row['entity_id'] = $category->getId();
             $row['store'] = $store->getCode();
             $row['parent_code'] = $parentCategory?->getData('category_code');
             $export[] = $row;

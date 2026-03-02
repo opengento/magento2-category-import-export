@@ -56,11 +56,6 @@ class Categories
 
         try {
             foreach ($rows as $row) {
-                // Unset the entity_id and/or row_id if they exist.
-                // Magento needs to create their own.
-                unset($row['entity_id']);
-                unset($row['row_id']);
-
                 $category = $collection->getItemByColumnValue('category_code', $row['category_code'])
                     ?? $this->categoryFactory->create();
                 $category->addData($row);
