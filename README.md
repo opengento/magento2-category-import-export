@@ -5,7 +5,7 @@
 [![Packagist](https://img.shields.io/packagist/dt/opengento/module-category-import-export.svg?style=flat-square)](https://packagist.org/packages/opengento/module-category-import-export/stats)
 [![Packagist](https://img.shields.io/packagist/dm/opengento/module-category-import-export.svg?style=flat-square)](https://packagist.org/packages/opengento/module-category-import-export/stats)
 
-This module add the many countries to many stores relation and make it available to the storefront.
+This module allows to import and export categories data from/to CSV file.
 
  - [Setup](#setup)
    - [Composer installation](#composer-installation)
