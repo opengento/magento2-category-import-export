@@ -88,7 +88,8 @@ class Categories
     {
         $batch = [];
         foreach ($data as $row) {
-            $batch[$this->storeManager->getStore($row['store'] ?? 'admin')->getId()][] = $this->utils->sanitizeData($row);
+            $store = trim($row['store'] ?? '') ?: 'admin';
+            $batch[$this->storeManager->getStore($store)->getId()][] = $this->utils->sanitizeData($row);
         }
 
         return $batch;
