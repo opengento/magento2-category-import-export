@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace Opengento\CategoryImportExport\Model\Export;
 
 use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\ResourceModel\Category\Collection;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -23,8 +24,7 @@ class Categories
         private CollectionFactory $collectionFactory,
         private StoreManagerInterface $storeManager,
         private Utils $utils
-    ) {
-    }
+    ) {}
 
     /**
      * @throws NoSuchEntityException
@@ -40,15 +40,19 @@ class Categories
         // Get the root category to derive the path prefix
         $rootCategoryId = (int) $store->getRootCategoryId();
 
+        /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
         $collection->setStoreId($storeId);
         $collection->setProductStoreId($storeId);
         $collection->setLoadProductCount(false);
         $collection->addAttributeToSelect($attributes);
-        $collection->addAttributeToFilter([
-            ['attribute' => 'is_virtual_category', 'null' => true],
-            ['attribute' => 'is_virtual_category', 'eq'   => 0]
-        ]);
+        // Built-in support for Elasticsuite integration: exclude virtual categories
+        if ($collection->getEntity()->getAttribute('is_virtual_category')) {
+            $collection->addAttributeToFilter([
+                ['attribute' => 'is_virtual_category', 'null' => true],
+                ['attribute' => 'is_virtual_category', 'eq'   => 0]
+            ]);
+        }
 
         $collection->addPathsFilter("1/{$rootCategoryId}");
 
