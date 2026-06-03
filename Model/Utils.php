@@ -12,6 +12,7 @@ use Opengento\CategoryImportExport\Model\Config\ExcludedFields;
 
 use function array_diff_key;
 use function array_flip;
+use function trim;
 
 class Utils
 {
@@ -24,7 +25,10 @@ class Utils
     {
         $categoryCode = $data['category_code'] ?? throw InputException::requiredField('category_code', $data['entity_id'] ?? null);
         $data = array_diff_key($data, array_flip($this->excludedFields->get()));
+        if (isset($data['parent_code'])) {
+            $data['parent_code'] = trim((string)$data['parent_code']);
+        }
 
-        return ['category_code' => $categoryCode] + $data;
+        return ['category_code' => trim((string)$categoryCode)] + $data;
     }
 }
