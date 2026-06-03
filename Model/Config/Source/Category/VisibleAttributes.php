@@ -65,7 +65,7 @@ class VisibleAttributes implements OptionSourceInterface
             ['']
         );
         $collection->addFieldToFilter('cea.is_visible', 1);
-        $collection->addFieldToFilter('attribute_code', 'category_code');
+        $collection->addFieldToFilter('attribute_code', ['neq' => 'category_code']);
         $collection->setOrder('frontend_label', 'ASC');
         $collection->setOrder('attribute_code', 'ASC');
 
