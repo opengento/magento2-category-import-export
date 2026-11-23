@@ -19,8 +19,11 @@
         "magento/module-catalog": "*"
     },
     "require-dev": {
-        "magento/magento-coding-standard": "^33",
-        "roave/security-advisories": "dev-latest"
+        "magento/magento-coding-standard": "^41",
+        "roave/security-advisories": "dev-latest",
+        "phpstan/phpstan": "^2.1",
+        "bitexpert/phpstan-magento": "^0.44",
+        "phpstan/extension-installer": "^1.4"
     },
     "suggest": {},
     "type": "magento2-module",
@@ -52,6 +55,12 @@
         ],
         "psr-4": {
             "Opengento\\CategoryImportExport\\": ""
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
         }
     }
 }
